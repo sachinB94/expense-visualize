@@ -1,0 +1,81 @@
+<md-progress-linear md-mode="indeterminate" ng-show="vm.showProgress"></md-progress-linear>
+<md-content layout="column" layout-margin>
+  <md-content layout="row">
+    <md-content id="expense-form" layout-margin flex="30">
+      <h4>Add Expense</h4>
+      <form layout="column" layout-fill>
+        
+        <md-input-container class="md-block" layout-margin>
+          <label>Name</label>
+          <input type="text" ng-model="vm.expense.name">
+        </md-input-container>
+        
+        <md-input-container class="md-block" layout-margin>
+          <label>Category</label>
+          <input type="text" ng-model="vm.expense.category">
+        </md-input-container>
+
+        <md-input-container class="md-block" layout-margin>
+          <label>Type</label>
+          <md-select ng-model="vm.expense.type">
+            <md-option ng-repeat="type in vm.EXPENSE_TYPES" value="{{ type }}">
+              {{ type }}
+            </md-option>
+          </md-select>
+        </md-input-container class="md-block" layout-margin>
+
+        <md-input-container class="md-block" layout-margin>
+          <label>Amount</label>
+          <input type="number" ng-model="vm.expense.amount">
+        </md-input-container>
+
+        <md-datepicker ng-model="vm.expense.date" md-placeholder="Expense Date" layout-margin></md-datepicker>
+
+        <md-button class="md-raised md-primary" ng-click="vm.addExpense()" flex-gt-sm layout-margin>Submit</md-button>
+
+      </form>
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <md-content layout="column" layout-fill>
+
+      <md-radio-group layout="row" ng-model="vm.chartControl" ng-change="vm.calculateChartData()">
+        <label>Select the type of chart to show: </label>
+        <md-radio-button value="date">Date</md-radio-button>
+        <md-radio-button value="category">Category</md-radio-button>
+      </md-radio-group>
+
+      <md-content id="chart" layout="row" layout-align="center center" flex>
+        <nvd3 ng-if="vm.chartData" options="vm.d3Options" data="vm.chartData" layout-margin layout-padding></nvd3>
+      </md-content>
+    </md-content>
+  </md-content>
+
+  <md-divider></md-divider>
+
+  <md-content>
+    <md-list flex>
+      <div layout="row" class="md-no-sticky">
+        <div flex="20">Name</div>
+        <div flex="20">Category</div>
+        <div flex="10">Type</div>
+        <div flex="20">Amount</div>
+        <div flex="20">Date</div>
+        <div flex></div>
+        <div flex></div>
+      </div>
+      <md-list-item class="md-2-line" ng-repeat="expense in vm.expenses">
+        <div class="md-list-item-text" layout="row">
+          <p flex="20">{{ expense.name }}</p>
+          <p flex="20">{{ expense.category }}</p>
+          <p flex="10">{{ expense.type }}</p>
+          <p flex="20">{{ expense.amount }}</p>
+          <p flex="20">{{ expense.formattedDate }}</p>
+          <a href flex ng-click="vm.openEditExpenseDialog($event, expense._id)"><i class="material-icons">mode_edit</i></a>
+          <a href flex ng-click="vm.deleteExpense(expense._id)"><i class="material-icons">delete</i></a>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</md-content>

@@ -1,0 +1,14 @@
+{
+  "generator-bangular": {
+    "version": "0.12.0",
+    "filters": {
+      "backend": "mongo",
+      "reload": "livereload",
+      "control": true,
+      "mocha": true,
+      "hasTests": true,
+      "sockets": false,
+      "auth": false
+    }
+  }
+}

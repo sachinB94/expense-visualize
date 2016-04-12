@@ -1,0 +1,45 @@
+<md-dialog aria-label="Edit expense" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Edit expense</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <form layout="column" layout-fill>
+        <md-input-container class="md-block" layout-margin>
+          <label>Name</label>
+          <input type="text" ng-model="expense.name">
+        </md-input-container>
+        <md-input-container class="md-block" layout-margin>
+          <label>Category</label>
+          <input type="text" ng-model="expense.category">
+        </md-input-container>
+        <md-input-container class="md-block" layout-margin>
+          <label>Type</label>
+          <md-select ng-model="expense.type">
+            <md-option ng-repeat="type in EXPENSE_TYPES" value="{{ type }}">
+              {{ type }}
+            </md-option>
+          </md-select>
+        </md-input-container class="md-block" layout-margin>
+        <md-input-container class="md-block" layout-margin>
+          <label>Amount</label>
+          <input type="number" ng-model="expense.amount">
+        </md-input-container>
+        <md-datepicker ng-model="expense.date" md-placeholder="Expense Date" layout-margin></md-datepicker>
+        <md-button class="md-raised md-primary" ng-click="submit()" flex-gt-sm layout-margin>Submit</md-button>
+      </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="submit()" style="margin-right:20px;">
+        Done
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
